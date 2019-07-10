@@ -1,0 +1,140 @@
+<mat-card class="sessies-card mat-elevation-z0">
+  <mat-card-header>
+    <mat-card-title>
+      <h2 class="animated fadeIn">Groepen</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <button mat-button *ngFor='let groep of groepNummers' (click)="applyGroepFilter(groep)" class="sessies-card-groep mat-elevation-z2"
+      [class.active]="groep === selectedGroepNr">
+      <b>{{groep}}</b>
+    </button>
+    <button mat-button class="sessies-card-groep mat-elevation-z2" (click)="addGroup()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="sessies-card mat-elevation-z0">
+  <mat-card-header>
+    <mat-card-title>
+      <h4 class="animated fadeIn" *ngIf="selectedGroepNr != 'Ø'">{{selectedGroep}}</h4>
+      <h4 class="animated fadeIn" *ngIf="selectedGroepNr === 'Ø'">Alle gebruikers</h4>
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="selectedGroepNr === 'Ø'">
+      Dit zijn alle gebruikers van de android app
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" *ngIf="dataSource" class="mat-elevation-z2">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Naam </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Group Column -->
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef> Groep </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field>
+            <mat-select [value]="groepen[element.groepnr]" (selectionChange)="changeGroup(element.uid, $event.value)">
+              <mat-option *ngFor="let groep of groepen" [value]="groep">
+                {{groep.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="removeUser(element.uid)" style="float: right">
+            <mat-icon class="remove-icon">delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+    <div style="float: right" *ngIf="dataSource.data.length > 1 || dataSource.data.length == 0"><b>{{dataSource.data.length}}</b>
+      gebruikers</div>
+    <div style="float: right" *ngIf="dataSource.data.length == 1"><b>{{dataSource.data.length}}</b> gebruiker</div>
+    <br>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="sessies-card mat-elevation-z0" *ngIf="selectedGroepNr != 'Ø'">
+  <mat-card-header>
+    <mat-card-title>
+      <h4 class="animated fadeIn">Gebruikers toevoegen</h4>
+    </mat-card-title>
+    <mat-card-subtitle>
+      Gebruikers toevoegen aan {{selectedGroep}}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSourceAll" *ngIf="dataSourceAll" class="mat-elevation-z2">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Naam </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Group Column -->
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef> Huidige groep </th>
+        <td mat-cell *matCellDef="let element">
+          {{groepen[element.groepnr].viewValue}}
+        </td>
+      </ng-container>
+
+      <!-- Add Column -->
+      <ng-container matColumnDef="add">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-flat-button class="sessies-card-groep" (click)="changeGroup(element.uid, groepen[selectedGroepNr])" style="float: right">
+              Toevoegen
+            </button>
+          </td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsAdd"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsAdd;"></tr>
+    </table>
+    <br>
+    <div style="float: right" *ngIf="dataSourceAll.data.length > 1 || dataSourceAll.data.length == 0"><b>{{dataSourceAll.data.length}}</b>
+      gebruikers</div>
+    <div style="float: right" *ngIf="dataSourceAll.data.length == 1"><b>{{dataSourceAll.data.length}}</b> gebruiker</div>
+    <br>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,33 @@
+<div>
+  <div mat-dialog-content>
+    <h4>Oefening aanmaken voor:</h4>
+    <p>{{sessie.naam}}</p>
+    <form [formGroup]="oefeningFormGroup">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Naam van de oefening*" formControlName="oefeningNaam" id="oefeningNaam">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Beschrijving van de oefening*" matTextareaAutosize matAutosizeMinRows="2"
+          matAutosizeMaxRows="5" formControlName="oefeningBeschrijving" id="oefeningBeschrijving"></textarea>
+      </mat-form-field>
+    </form>
+
+    <label for="sessieBestand">
+      <input mat-raised-button type="file" class="form-control-file" (change)="onFileChange($event)">
+    </label>
+    <br>
+    <br>
+    <h4>Zichtbaar voor volgende groepen:</h4>
+    <div *ngFor='let nummer of groepNummers'>
+      <mat-checkbox (change)="checkGroep($event, nummer)">
+        {{nummer}}
+      </mat-checkbox>
+      <br>
+    </div>
+  </div>
+  <ngx-ui-loader></ngx-ui-loader>
+  <div mat-dialog-actions class="rightfloat">
+    <button mat-button (click)="onNoClick()" tabindex=-1>Annuleren</button>
+    <button mat-flat-button (click)="oefeningOpslaan()" tabindex=-1 disabled="{{!oefeningFormGroup.valid}}"><strong>Opslaan</strong></button>
+  </div>
+</div>

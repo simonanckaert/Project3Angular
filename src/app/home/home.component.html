@@ -1,0 +1,19 @@
+<mat-card class="nav-card animated mat-elevation-z0">
+  <mat-card-header style="display : inline;">
+    <mat-card-title>
+      <h1 class="animated fadeIn">{{berekenGroet()}} {{name}}!</h1>
+    </mat-card-title>
+    <mat-card-subtitle class="animated fadeIn delay-1s">Navigeer naar de andere pagina's om acties uit te voeren.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button mat-button routerLink="/berichten" routerLinkActive="active"><u class="animated fadeIn delay-2s">{{ongelezenBericht()}}</u></button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="mat-elevation-z1" id="footer">
+  <mat-card-content>
+    <button mat-button routerLink="/registreren" routerLinkActive="active">
+      Nieuwe administratieve gebruiker registreren?
+    </button>
+  </mat-card-content>
+</mat-card>

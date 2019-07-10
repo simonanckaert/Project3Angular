@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@font-face {
+  font-family: scrip;
+  src: url(assets/SCRIPTBL.TTF) format("truetype");
+}
+
+body {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.mat-flat-button {
+  background-color: #0069D9;
+  color: white;
+  font-weight: 100;
+}
+
+.mat-raised-button {
+  background-color: #0069D9;
+  color: white;
+  font-weight: 100;
+}
+
+.mat-warn {
+  background-color: #F2453C;
+  color: #fff;
+}

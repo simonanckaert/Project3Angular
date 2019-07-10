@@ -1,0 +1,42 @@
+.oefeningen-card{
+    margin: 10px;
+  }
+  
+  .list-group-item.active {
+    z-index: 0;
+    background-color: #87D37C;
+    border: 1px solid darkgray;
+  }
+  
+  .active-list-item {
+    color: #3F51B5 !important; /* Note: You could also use a custom theme */
+  }
+  
+  .list-group-item:hover {
+    background-color: #87D37C;
+    color: white;
+  }
+  
+  .row {
+    margin: 5px;
+  }
+  
+  .column-01 {
+    flex: 35%;
+  }
+  
+  .column-02 {
+    flex: 65%;
+    margin-top: 10px;
+  }
+
+  .global-card{
+    margin: 20px;
+    width: auto;
+
+  }
+  
+  .centered-div{
+    display: flex;
+    justify-content: center;
+  }

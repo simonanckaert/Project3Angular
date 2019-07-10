@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Pas op!</h1>
+<div mat-dialog-content>
+  <p>{{data.dataSentence}} <b>{{data.dataName}}</b>
+    <br>
+    (Deze actie kan niet meer ongedaan gemaakt worden!)
+  </p>
+</div>
+<br>
+<div mat-dialog-actions style="float: right">
+  <button mat-button (click)="onNoClick()">Nee</button>
+  <button mat-button [mat-dialog-close]="data.dataId">Ja</button>
+</div>

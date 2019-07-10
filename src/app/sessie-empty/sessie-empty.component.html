@@ -1,0 +1,19 @@
+<div>
+  <div mat-dialog-content>
+    <h4>Sessie aanmaken</h4>
+    <form [formGroup]="sessieFormGroup">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Naam van de sessie*" formControlName="sessieNaam" id="sessieNaam">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Beschrijving van de sessie*" matTextareaAutosize matAutosizeMinRows="2"
+          matAutosizeMaxRows="5" formControlName="sessieBeschrijving" id="sessieBeschrijving"></textarea>
+      </mat-form-field>
+    </form>
+    <br>
+  </div>
+  <div mat-dialog-actions class="rightfloat">
+    <button mat-button (click)="onNoClick()" tabindex=-1>Annuleren</button>
+    <button mat-flat-button (click)="sessieOpslaan()" tabindex=-1 disabled="{{!sessieFormGroup.valid}}"><strong>Opslaan</strong></button>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async) && aangemeld">
+      
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home" routerLinkActive="active">Home</a>
+      <a mat-list-item routerLink="/sessies" routerLinkActive="active">Sessies</a>
+      <a mat-list-item routerLink="/aankondigingen" routerLinkActive="active">Aankondigingen</a>
+      <a mat-list-item routerLink="/gebruikers" routerLinkActive="active">Gebruikers</a>
+      <a mat-list-item routerLink="/berichten" routerLinkActive="active">Berichten</a>
+      <a mat-list-item routerLink="/feedback" routerLinkActive="active">Feedback</a>
+      <br>
+      <br>
+      <button *ngIf="(isHandset$ | async)" (click)="logout(); drawer.toggle()" mat-raised-button class="basic-button-center">Afmelden</button>  
+    </mat-nav-list>
+    
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="(isHandset$ | async) && aangemeld">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span id="title"><img _ngcontent-c1="" src="assets/logo.png">Mindfulness</span> 
+      <button *ngIf="!(isHandset$ | async) && aangemeld" (click)="logout()" mat-raised-button class="basic-button-right">Afmelden</button>  
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

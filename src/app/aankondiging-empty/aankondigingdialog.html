@@ -1,0 +1,24 @@
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field>
+        <input matInput
+                placeholder="Aankondiging"
+               formControlName="aankondiging">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Groep" formControlName="groep">
+          <mat-option *ngFor="let nummer of groepNummers" [value]="nummer" >
+              {{nummer}}
+            </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Kies een datum" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Sluiten</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Opslaan</button>
+</mat-dialog-actions>

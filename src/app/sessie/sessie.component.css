@@ -1,0 +1,9 @@
+.rightfloat {
+  widows: 100%;
+  float: right;
+}
+
+/* class repeated for increased specificity */
+.mat-form-field.mat-form-field {
+  width: 100%;
+}

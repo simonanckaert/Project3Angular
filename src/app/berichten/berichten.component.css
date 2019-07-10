@@ -1,0 +1,112 @@
+.berichten-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 92%;
+    width: 99%;
+}
+ 
+.mat-drawer.mat-drawer-side {
+    padding: 0 5px;
+}
+ 
+.empty-conversation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+ 
+.conversation-header h2, .conversation-header p {
+    padding: 5px 5px;
+    align-items: center;
+    display: flex;
+}
+ 
+.text-center {
+    text-align: center;
+    width: 100%;
+}
+ 
+.conversation-history.mat-list {
+    height: calc(100% - 150px);
+    overflow-x: scroll;
+    position: absolute;
+    width: 97%;
+}
+ 
+.conversation-history.mat-list p {
+    margin: 0;
+}
+ 
+.empty-conversation h1 {
+    margin: 0;
+}
+ 
+.klanten-gesprekken .mat-list-item {
+    cursor: pointer;
+}
+ 
+.mat-card {
+    height: 100%;
+    padding: 0 24px;
+    overflow: scroll;
+}
+.conversation-input {
+    position: absolute;
+    bottom: 0;
+    width: 98%;    
+    background-color: #fafafa;
+}
+ 
+
+::-webkit-scrollbar {
+    display: none;
+    }
+
+.full-width {
+    width: 100%;
+}
+ 
+.full-width .mat-icon {
+    cursor: pointer;
+}
+ 
+.berichtText {
+    font-size: 18pt;
+}
+    
+.messageAdmin {
+text-align: right;
+width: 100%;
+}
+.messageClient{
+text-align: left;
+width: 100%;
+}
+
+
+.berichtText{
+    width: 100%;
+}
+.miniText{
+    font-size: 9pt;
+
+}
+
+.row {
+    display: flex;
+    margin-left: 15px;
+    margin-right: 7px;
+    margin-top: 15px;
+    height: 90%;
+  }
+  
+  .column-01 {
+    flex: 14%;
+  }
+  
+  .column-02 {
+    flex: 84%;
+    margin-left: 1%;
+  }

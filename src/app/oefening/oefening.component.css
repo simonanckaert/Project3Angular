@@ -1,0 +1,35 @@
+audio {
+  width: 100%;
+}
+
+.rightfloat {
+  widows: 100%;
+  float: right;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container>* {
+  width: 100%;
+}
+
+
+/* class repeated for increased specificity */
+.mat-form-field.mat-form-field {
+  width: 100%;
+}
+
+#beschrijving {
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+.mat-dialog-content {
+  width: 500px;
+}

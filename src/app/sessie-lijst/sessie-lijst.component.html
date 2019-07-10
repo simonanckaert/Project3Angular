@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="column-01">
+    <mat-card class="sessies-card mat-elevation-z0">
+      <mat-card-header>
+        <mat-card-title>
+          <h1 class="animated fadeIn">Sessies</h1>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-nav-list>
+            <a mat-list-item class="list-group-item" (click)="toonSessieInfo(s)" [ngClass]="{'active': _sessie == s}"
+              *ngFor="let s of sessies">{{s.naam}}</a>
+          </mat-nav-list>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" style="background-color: #0069D9; width: 100%" (click)="openEmptyDialog()">
+          SESSIE TOEVOEGEN
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="column-02">
+    <div *ngIf="!sessie">
+        <mat-card class="sessie-card mat-elevation-z0">
+            <h4 style="display: flex; justify-content:center;">Kies aub een sessie.</h4>
+        </mat-card>
+    </div>
+    <div *ngIf="sessie">
+      <app-sessie [sessie]="sessie"></app-sessie>
+    </div>
+  </div>
+</div>
+

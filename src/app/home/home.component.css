@@ -1,0 +1,12 @@
+.nav-card {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: center;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

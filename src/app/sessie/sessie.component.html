@@ -1,0 +1,82 @@
+<mat-card class="mat-elevation-z0">
+  <div class="rightfloat">
+    <button mat-button (click)="toggleEditMode()" disabled="{{editMode}}" tabindex=-1>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!editMode">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>{{sessie.naam}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card class="sessie-card">
+        <mat-card-header>
+          <mat-card-title>
+            <h5>Beschrijving</h5>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{sessie.beschrijving}}</p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-card class="sessie-card">
+        <mat-card-header>
+          <mat-card-title>
+            <h5>Oefeningen</h5>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <p *ngIf="sessie.oefeningen && sessie.oefeningen.length < 1">Nog geen oefeningen toegevoegd!</p>
+            <mat-nav-list>
+              <a mat-list-item class="list-group-item" (click)="openDialog(oefening)" *ngFor="let oefening of sessie.oefeningen">{{oefening.naam}}</a>
+            </mat-nav-list>
+          </mat-list>
+          <br>
+          <button mat-raised-button color="primary" style="background-color: #0069D9; width: 100%" (click)="openEmptyDialog()">
+            OEFENING TOEVOEGEN
+          </button>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+      <br>
+      <mat-card class="sessie-card">
+        <mat-card-header>
+          <mat-card-title>
+            <h5>Toegangscode</h5>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <b>{{sessie.sessieCode}}</b>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </div>
+  <mat-card-content>
+    <div *ngIf="editMode">
+      <h4>Sessie wijzigen</h4>
+      <form [formGroup]="sessieFormGroup">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Naam van de sessie" value="{{sessie.naam}}" formControlName="sessieNaam" id="sessieNaam">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Beschrijving van de sessie" matTextareaAutosize matAutosizeMinRows="6" value="{{sessie.beschrijving}}"
+            formControlName="sessieBeschrijving" id="sessieBeschrijving"></textarea>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Sessiecode" value="{{sessie.sessieCode}}" formControlName="sessieCode" id="sessieCode">
+        </mat-form-field>
+      </form>
+      <mat-card-actions class="rightfloat">
+        <button mat-button (click)="onNoClick()">Annuleren</button>
+        <button mat-flat-button (click)="sessieOpslaan()" tabindex=-1 disabled="{{!sessieFormGroup.valid}}"><strong>Opslaan</strong></button>
+      </mat-card-actions>
+      <br>
+      <br>
+    </div>
+  </mat-card-content>
+</mat-card>
