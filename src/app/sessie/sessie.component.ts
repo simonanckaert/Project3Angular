@@ -36,7 +36,6 @@ export class SessieComponent implements OnInit, OnChanges {
       sessieBeschrijving: [this.sessie.beschrijving, [Validators.required]],
       sessieCode: [this.sessie.sessieCode]
     });
-    console.log(this.sessie);
     this.getOefeningen();
   }
 
@@ -66,7 +65,6 @@ export class SessieComponent implements OnInit, OnChanges {
   }
   // Open new dialog to add exercise
   openEmptyDialog(): void {
-    console.log(this.sessie)
     const dialogRef = this.dialog.open(OefeningEmptyComponent, {
       minWidth: 300,
       data: this.sessie

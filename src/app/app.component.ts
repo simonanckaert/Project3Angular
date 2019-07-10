@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import * as firebase from 'firebase';
-import { firebaseAndroidConfig } from 'src/environments/environment';
+//import * as firebase from 'firebase';
+//import { firebaseAndroidConfig } from 'src/environments/environment';
 
 
 @Component({
@@ -11,6 +11,6 @@ import { firebaseAndroidConfig } from 'src/environments/environment';
 export class AppComponent {
   title = 'mindfulness';
   ngOnInit() {
-    firebase.initializeApp(firebaseAndroidConfig)
+    //firebase.initializeApp(firebaseAndroidConfig)
   }
 }

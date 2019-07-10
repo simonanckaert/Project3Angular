@@ -46,6 +46,7 @@ import { VerwijderAlertComponent } from './verwijder-alert/verwijder-alert.compo
 //import { NgxLoadingModule } from 'ngx-loading';
 import localeNl from '@angular/common/locales/nl-BE';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 /** test@test.com   123456 */
 
@@ -115,7 +116,7 @@ registerLocaleData(localeNl);
       useFactory: adapterFactory
     }),
   ],
-  providers: [ AuthenticationService, AuthGuardService, OefeningDataService, SessieDataService ],
+  providers: [ AuthenticationService, AuthGuardService, OefeningDataService, SessieDataService, AngularFireStorage ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

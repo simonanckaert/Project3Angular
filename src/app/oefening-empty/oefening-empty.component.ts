@@ -6,8 +6,8 @@ import { OefeningDataService } from '../oefening-data.service';
 import { FormGroup, Validators, FormBuilder } from '../../../node_modules/@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { GebruikerDataService } from '../gebruiker-data.service';
-import * as firebase from 'firebase';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-oefening-empty',
@@ -26,7 +26,7 @@ export class OefeningEmptyComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<OefeningEmptyComponent>, @Inject(MAT_DIALOG_DATA) public sessie: Sessie,
     private oefDataService: OefeningDataService, public gService: GebruikerDataService, 
-    private fb: FormBuilder, private ngxService: NgxUiLoaderService) {
+    private fb: FormBuilder, private ngxService: NgxUiLoaderService, private firebaseStorage: AngularFireStorage) {
     //this._gebruikers = this.gService.getUsers();
     /*this._gebruikers.subscribe(result => {
       this.setGroepen(result);
@@ -87,9 +87,9 @@ export class OefeningEmptyComponent implements OnInit {
       groepen = groepen.slice(0, -1);
 
       //uploaden bestand, daarna pas de oefening
-      var storageRef = firebase.storage().ref(this.file.name)
+      var storageRef = this.firebaseStorage.ref(this.file.name)
       storageRef.put(this.file).then(() => {     
-        firebase.storage().ref(this.file.name).getDownloadURL().then(result => {
+        this.firebaseStorage.ref(this.file.name).getDownloadURL().toPromise().then(result => {
           oefening.url = result
           oefening.groepen = groepen;
           oefening.file = this.file;

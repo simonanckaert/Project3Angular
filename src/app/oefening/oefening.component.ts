@@ -7,7 +7,8 @@ import { FormGroup, Validators, FormBuilder } from '../../../node_modules/@angul
 import * as globals from '../../globals/globals';
 import { GebruikerDataService } from '../gebruiker-data.service';
 import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+//import * as firebase from 'firebase';
 
 
 @Component({
@@ -28,13 +29,11 @@ export class OefeningComponent implements OnInit {
   constructor(private oefDataService: OefeningDataService, public gService: GebruikerDataService,
               public dialogRef: MatDialogRef<OefeningComponent>,
               @Inject(MAT_DIALOG_DATA) public oef: Oefening, private fb: FormBuilder) {
-    console.log(this.oef)
     /*this.gebruikers = this.gService.getUsers();
     this.gebruikers.subscribe(result => {
       this.setGroepen(result);
     });*/
     this.setSelectedGroepen();
-    console.log(this.url)
   }
 
   // Set available groupnrs
@@ -49,7 +48,6 @@ export class OefeningComponent implements OnInit {
 
   // Set groupnrs of selected exercise
   setSelectedGroepen() {
-    console.log(this.selectedGroepnummers)
     this.selectedGroepnummers = this.oef.groepen.split(',');
   }
 
@@ -65,10 +63,10 @@ export class OefeningComponent implements OnInit {
       oefeningBeschrijving: [this.oef.beschrijving, [Validators.required]],
     });
 
-    firebase.storage().ref(this.oef.fileName).getDownloadURL().then(result => {
+    /*firebase.storage().ref(this.oef.fileName).getDownloadURL().then(result => {
       console.log(result)
       this.url = result
-    })
+    })*/
   }
 
   // Toggle editmode on/off
@@ -87,7 +85,6 @@ export class OefeningComponent implements OnInit {
       }
     }
     this.selectedGroepnummers.sort();
-    console.log(this.selectedGroepnummers);
   }
   // Remove exercise
   oefeningVerwijderen() {

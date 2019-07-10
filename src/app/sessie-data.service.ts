@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 import { List } from 'lodash';
 import { Oefening } from './oefening/oefening.model';
 

@@ -4,7 +4,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 
