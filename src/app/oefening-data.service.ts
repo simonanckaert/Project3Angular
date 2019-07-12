@@ -6,10 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import { Feedback } from './feedback/feedback.model';
 import { SessieDataService } from './sessie-data.service';
 import { Sessie } from './sessie/sessie.model';
+import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable()
 export class OefeningDataService {
-  constructor(private http: HttpClient, private sessieService : SessieDataService) {}
+  constructor(private http: HttpClient, private sessieService : SessieDataService, private afs: AngularFirestore) {}
 
   getOefeningen(): Observable<Oefening[]> {
     return this.http.get<Oefening[]>(globals.backendUrl + `/oefeningen`).pipe();
@@ -43,6 +44,12 @@ export class OefeningDataService {
   }
 
   verwijderOefening(oefening: Oefening) {
+    //this.sessieService.verwijderOefening(oefening);
+    console.log('in verwijderen oefening')
+    const oefRef: AngularFirestoreDocument<any> = this.afs.collection(`sessies/${oefening.sessieId}/oefeningen`).doc(`${oefening.oefeningId}`)/*.doc(`sessies/${oefening.sessieId}/oefeningen/`);*/
+    console.log(oefRef);
+    oefRef.delete();
+    //oefRef.delete().then(() => console.log('tis gelukt')).catch(() => console.log('this niet gelukt'));
     /*return this.http
       .delete(globals.backendUrl + '/oefeningen/' + oefening.oefeningId)
       .subscribe(

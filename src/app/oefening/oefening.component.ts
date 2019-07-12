@@ -8,6 +8,8 @@ import * as globals from '../../globals/globals';
 import { GebruikerDataService } from '../gebruiker-data.service';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
+import { SessieDataService } from '../sessie-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 //import * as firebase from 'firebase';
 
 
@@ -28,7 +30,8 @@ export class OefeningComponent implements OnInit {
 
   constructor(private oefDataService: OefeningDataService, public gService: GebruikerDataService,
               public dialogRef: MatDialogRef<OefeningComponent>,
-              @Inject(MAT_DIALOG_DATA) public oef: Oefening, private fb: FormBuilder) {
+              @Inject(MAT_DIALOG_DATA) public oef: Oefening, private fb: FormBuilder,
+              private sessieDataService: SessieDataService) {
     /*this.gebruikers = this.gService.getUsers();
     this.gebruikers.subscribe(result => {
       this.setGroepen(result);
@@ -86,10 +89,21 @@ export class OefeningComponent implements OnInit {
     }
     this.selectedGroepnummers.sort();
   }
+
   // Remove exercise
   oefeningVerwijderen() {
     if (confirm('Ben je zeker dat je ' + this.oef.naam + ' wilt verwijderen?')) {
-      this.oefDataService.verwijderOefening(this.oef);
+      var sessieObservable = this.sessieDataService.getSessie(this.oef.sessieId);
+      sessieObservable.subscribe(
+        data => {
+          const index : number = data.oefeningen.map(oefening => oefening.oefeningId).indexOf(this.oef.oefeningId);
+          data.oefeningen.splice(index, 1);
+          this.sessieDataService.verwijderOefening(data, this.oef);
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      );
       this.dialogRef.close();
     }
   }

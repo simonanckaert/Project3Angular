@@ -77,7 +77,7 @@ export class SessieLijstComponent implements OnInit, OnChanges {
   openEmptyDialog(): void {
     const dialogRef = this.dialog.open(SessieEmptyComponent, {
       minWidth: 300,
-      data: this._sessies == undefined? 1: this._sessies.length
+      data: this._sessies == undefined? 1: this._sessies.length+1
     });
 
     dialogRef.afterClosed().subscribe(result => {

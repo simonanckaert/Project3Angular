@@ -21,6 +21,7 @@ export class Oefening {
       const oefening = new Oefening(
         json.naam, json.beschrijving, json.sessieId
       );
+      oefening.oefeningId = json.oefeningId
       oefening.fileMimetype = json.fileMimetype
       oefening.fileName = json.fileName
       oefening.fileOriginalName = json.fileOriginalName
@@ -32,7 +33,7 @@ export class Oefening {
 
     toJSON() {
       return {
-        //oefeningId: this.oefeningId,
+        oefeningId: this.oefeningId,
         naam: this.naam,
         beschrijving: this.beschrijving,
         sessieId: this.sessieId,

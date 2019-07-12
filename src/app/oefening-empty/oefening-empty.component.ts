@@ -31,8 +31,8 @@ export class OefeningEmptyComponent implements OnInit {
     /*this._gebruikers.subscribe(result => {
       this.setGroepen(result);
     });*/
-    console.log("in oefempty")
-    console.log(sessie)
+    //console.log("in oefempty")
+    //console.log(sessie)
     this.setGroepen(null);
   }
 
@@ -90,6 +90,7 @@ export class OefeningEmptyComponent implements OnInit {
       var storageRef = this.firebaseStorage.ref(this.file.name)
       storageRef.put(this.file).then(() => {     
         this.firebaseStorage.ref(this.file.name).getDownloadURL().toPromise().then(result => {
+          oefening.oefeningId = this.sessie.oefeningen.length
           oefening.url = result
           oefening.groepen = groepen;
           oefening.file = this.file;
@@ -98,7 +99,6 @@ export class OefeningEmptyComponent implements OnInit {
           oefening.fileOriginalName = this.file.name;
           oefening.fileSize = this.file.size;
           this.sessie.addOefening(oefening);
-          this.loading = false;
           this.dialogRef.close(this.oefDataService.voegNieuweOefeningToe(this.sessie));
         }).finally(() => this.ngxService.stop())
       })

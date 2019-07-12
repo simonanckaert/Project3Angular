@@ -37,6 +37,7 @@ export class SessieComponent implements OnInit, OnChanges {
       sessieCode: [this.sessie.sessieCode]
     });
     this.getOefeningen();
+    //console.log(this.sessie)
   }
 
   ngOnChanges() {

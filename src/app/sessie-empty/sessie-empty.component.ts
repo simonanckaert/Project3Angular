@@ -40,6 +40,7 @@ export class SessieEmptyComponent implements OnInit {
         this.sessieFormGroup.value.sessieNaam,
         this.sessieFormGroup.value.sessieBeschrijving
       );
+      //console.log(sessie)
 
       this.dialogRef.close(
         this._sessieDataService.uploadSessie(sessie)
