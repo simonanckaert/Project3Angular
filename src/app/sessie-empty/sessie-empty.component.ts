@@ -40,6 +40,7 @@ export class SessieEmptyComponent implements OnInit {
         this.sessieFormGroup.value.sessieNaam,
         this.sessieFormGroup.value.sessieBeschrijving
       );
+      sessie.sessieCode = (Math.floor(Math.random()*90000) + 10000).toString();
       //console.log(sessie)
 
       this.dialogRef.close(

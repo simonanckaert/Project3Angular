@@ -17,11 +17,11 @@ import { List } from 'lodash';
   providers: [{ provide: FirebaseOptionsToken, useValue: firebaseAndroidConfig }]
 })
 export class SessieLijstComponent implements OnInit, OnChanges {
-  private _sessie: Sessie;
-  private _sessies: List<Sessie>;
+  sessie: Sessie;
+  sessies: List<Sessie>;
   public errorMsg: string;
 
-  constructor(public db: AngularFirestore, public dialog: MatDialog, private _sessieDataService: SessieDataService) {}
+  constructor(public db: AngularFirestore, public dialog: MatDialog, private sessieDataService: SessieDataService) {}
 
   ngOnInit() {
     this.getSessies();
@@ -31,19 +31,11 @@ export class SessieLijstComponent implements OnInit, OnChanges {
     this.getSessies();
   }
 
-  get sessies(): List<Sessie> {
-    return this._sessies;
-  }
-
-  get sessie(): Sessie {
-    return this._sessie;
-  }
-
   // HTTP Get request to get all sessies
   getSessies() {
-    this._sessieDataService.getSessies().subscribe(
+    this.sessieDataService.getSessies().subscribe(
       data => {
-        this._sessies = data.map(e => {
+        this.sessies = data.map(e => {
           return new Sessie(e['id'],
           e['naam'],
           e['beschrijving'],
@@ -61,13 +53,13 @@ export class SessieLijstComponent implements OnInit, OnChanges {
 
   // Show sessie info view
   toonSessieInfo(sessie: Sessie): Sessie {
-    this._sessie = sessie;
-    return this._sessie;
+    this.sessie = sessie;
+    return this.sessie;
   }
 
   // Checks if sessie is clicked
   sessieGekozen(): boolean {
-    if (this._sessie != null) {
+    if (this.sessie != null) {
       return true;
     }
     return false;
@@ -77,7 +69,7 @@ export class SessieLijstComponent implements OnInit, OnChanges {
   openEmptyDialog(): void {
     const dialogRef = this.dialog.open(SessieEmptyComponent, {
       minWidth: 300,
-      data: this._sessies == undefined? 1: this._sessies.length+1
+      data: this.sessies == undefined? 1: this.sessies.length+1
     });
 
     dialogRef.afterClosed().subscribe(result => {

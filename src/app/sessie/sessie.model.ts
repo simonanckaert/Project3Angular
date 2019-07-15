@@ -1,6 +1,7 @@
 import { Oefening } from '../oefening/oefening.model';
 
 export class Sessie {
+ 
   naam: string;
   beschrijving: string;
   oefeningen : Array<Oefening> = [];
@@ -18,7 +19,7 @@ export class Sessie {
     if(sessieCode != undefined) {
       this.sessieCode = sessieCode;
     } 
-  }
+  } 
 
   /**
    * voegt een oefening toe aan deze sessie
@@ -26,5 +27,16 @@ export class Sessie {
    */
   addOefening(oefening: Oefening) {
     this.oefeningen.push(oefening);
+  }
+
+  
+  toJson() {
+    return {
+      naam: this.naam,
+      beschrijving: this.beschrijving,
+      oefeningen: this.oefeningen.map(oef => oef.toJSON()),
+      id: this.id,
+      sessieCode: this.sessieCode
+    };
   }
 }

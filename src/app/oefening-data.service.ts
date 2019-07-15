@@ -7,6 +7,7 @@ import { Feedback } from './feedback/feedback.model';
 import { SessieDataService } from './sessie-data.service';
 import { Sessie } from './sessie/sessie.model';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { Aankondiging } from './aankondiging/aankondiging';
 
 @Injectable()
 export class OefeningDataService {

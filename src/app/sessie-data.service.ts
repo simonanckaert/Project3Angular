@@ -8,6 +8,7 @@ import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firest
 import { List } from 'lodash';
 import { Oefening } from './oefening/oefening.model';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Aankondiging } from './aankondiging/aankondiging';
 
 @Injectable({
   providedIn: 'root'
@@ -24,23 +25,10 @@ export class SessieDataService {
 
   getSessies() {
     return this.afs.collection('sessies').valueChanges()
-    /*console.log('halloo')
-    try {
-      let response = await this.afs.collection('sessies').valueChanges().toPromise();
-      console.log(response)
-      this._sessies = response.map(e => {
-        return new Sessie(e['id'],
-        e['naam'],
-        e['beschrijving'],
-        e['sessieCode'],
-        e['oefeningen'] !=  undefined ? e['oefeningen'].map(oef => Oefening.fromJSON(oef)) : [])
-      });
-      console.log(this._sessies);
-      return this._sessies;
-    } catch(error) {
-      this.errorMsg = error;
-    }*/
-    
+  }
+
+  getAankondigingen() {
+    return this.afs.collection('aankondigingen').valueChanges();
   }
   
 
@@ -56,14 +44,17 @@ export class SessieDataService {
 
   uploadSessie(sessie: Sessie) {
     const sessieRef: AngularFirestoreDocument<any> = this.afs.doc(`sessies/${sessie.id}`);
-    const data = {
-      naam: sessie.naam,
-      beschrijving: sessie.beschrijving,
-      oefeningen: sessie.oefeningen.map(oef => oef.toJSON()),
-      id: sessie.id,
-      sessieCode: "AAAAA"
-    };
+    const data = sessie.toJson();
     return sessieRef.set(data, { merge: true });
+  }
+
+  voegNieuweAankondigingToe(aankondiging: Aankondiging) {
+    console.log('in service');
+    console.log(aankondiging);
+    const aankondigingRef: AngularFirestoreDocument<any> = this.afs.doc(`aankondigingen/${aankondiging.id}`)
+    const data = aankondiging.toJson();
+    console.log(data);
+    return aankondigingRef.set(data, { merge: true});
   }
 
   /*verwijderOefening(oefening: Oefening): any {
