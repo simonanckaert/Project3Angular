@@ -122,7 +122,9 @@ export class SessieComponent implements OnInit, OnChanges {
   }
 
   verwijderSessie() {
-    this.sessieDataService.verwijderSessie(this.sessie);
-    this.sessie = null;
+    if (confirm('Ben je zeker dat je ' + this.sessie.naam + ' wilt verwijderen?')) {
+      this.sessieDataService.verwijderSessie(this.sessie);
+      this.showSnackBar('Sessie succesvol verwijderd! Gelieve een andere sessie te selecteren.')
+    }
   }
 }
