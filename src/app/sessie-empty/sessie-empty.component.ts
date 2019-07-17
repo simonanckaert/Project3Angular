@@ -14,7 +14,7 @@ export class SessieEmptyComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SessieEmptyComponent>,
-    private _sessieDataService: SessieDataService,
+    private sessieDataService: SessieDataService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public id: number
   ) { 
@@ -44,7 +44,7 @@ export class SessieEmptyComponent implements OnInit {
       //console.log(sessie)
 
       this.dialogRef.close(
-        this._sessieDataService.uploadSessie(sessie)
+        this.sessieDataService.uploadSessie(sessie)
       );
     }
   }

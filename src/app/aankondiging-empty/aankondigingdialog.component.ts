@@ -45,13 +45,10 @@ constructor(private dialog: MatDialog, private db :AngularFireDatabase ,
     });*/
     this.groepNummers.push(1,2,3);
     this.groepNummers.sort();
-    console.log(this.groepNummers.length);
   }
 
   save() {
     this.dataService.voegNieuweAankondigingToe(new Aankondiging(new Date().getTime().toString(),this.form.value.aankondiging,this.form.value.date,this.form.value.groep))
-    //console.log(new Date().toDateString())
-    console.log(this.form)
     this.dialogRef.close(this.form.value);
   }
 

@@ -17,7 +17,8 @@ import { AankondigingenComponentDialog } from '../aankondiging-empty/aankondigin
 import { Observable } from 'rxjs';
 import { SessieDataService } from '../sessie-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import * as moment from 'moment';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-aankondigingen',
@@ -53,7 +54,7 @@ export class AankondigingenComponent implements OnInit {
 
   activeDayIsOpen: boolean = true; 
 
-  constructor(private modal: NgbModal,private dialog: MatDialog, private dataService : SessieDataService ) {  }
+  constructor(private modal: NgbModal,private dialog: MatDialog, private dataService : SessieDataService, public snackbar: MatSnackBar ) {}
       
   ngOnInit() {  
     this.getAankondigingen()  
@@ -68,8 +69,8 @@ export class AankondigingenComponent implements OnInit {
       data => {
         this.aankondigingen = data.map(e => {
           return new Aankondiging(e['id'],
-          e['tekst'],
-          new Date(e['datum']),
+          e['title'],
+          new Date(e['start']),
           e['groep'],
         );
         
@@ -80,17 +81,34 @@ export class AankondigingenComponent implements OnInit {
           } while trying to retrieve sessies: ${error.error}`;*/
       }), 
       this.aankondigingen.sort((a, b) => {
-        return a.datum.getTime() - b.datum.getTime();
+        return a.start.getTime() - b.start.getTime();
       });
+      this.aankondigingen.forEach(aankondiging => this.checkAlsDatumGepasseerdIs(aankondiging));
+      this.aankondigingen.forEach(aankondiging => this.events.push(aankondiging));
     }   
     )
-    
+  }
+
+  private checkAlsDatumGepasseerdIs(aankondiging: Aankondiging) {
+    let vandaag = new Date();
+    vandaag.setHours(0,0,0,0)
+    if(moment(aankondiging.start).isBefore(vandaag)) {
+      this.verwijderAankondiging(aankondiging.id)
+    }
+  }
+
+  private verwijderAankondiging(id: string) {
+    this.dataService.verwijderAankondiging(id)
+  }
+
+  private bevestigVerwijderenAankondiging(aankondiging: Aankondiging) {
+    if(confirm(`Zeker dat u ${aankondiging.title} wilt verwijderen?`)) {
+      this.verwijderAankondiging(aankondiging.id);
+    }
+    this.snackbar.open('Aankondiging is verwijderd')
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    //console.log(date)
-    //console.log(this.viewDate)
-    //console.log(this.aankondigingen)
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -111,10 +129,9 @@ export class AankondigingenComponent implements OnInit {
     }); 
   }
 
-  /*addAnnouncement(announcement:Aankondiging): void{
-    this.db.list<Aankondiging>('/Announcement').push(announcement)
-    window.location.reload();
-    
-  }*/
-  
+  showSnackBar(message: string) {
+    this.snackbar.open(message, '', {
+      duration: 200,
+    });
+  }
 }

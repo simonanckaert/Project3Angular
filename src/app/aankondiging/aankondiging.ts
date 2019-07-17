@@ -1,13 +1,13 @@
 export class Aankondiging {
 
-    constructor(public id: string, public tekst: string, public datum: Date, public groep: string) {
+    constructor(public id: string, public title: string, public start: Date, public groep: string) {
     }
 
     toJson() {
         return {
             id: this.id,
-            tekst: this.tekst,
-            datum: this.datum.getTime(),
+            title: this.title,
+            start: this.start.getTime(),
             groep: this.groep
           }
     }

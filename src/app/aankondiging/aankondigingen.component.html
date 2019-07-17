@@ -35,13 +35,13 @@
   <br>
 
   <div [ngSwitch]="view" class="aklist">
-    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="aankondigingen"
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
       [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" [locale]="locale">
     </mwl-calendar-month-view>
-    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="aankondigingen"
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
       [refresh]="refresh" [locale]="locale">
     </mwl-calendar-week-view>
-    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="aankondigingen" [refresh]="refresh"
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
       [locale]="locale">
     </mwl-calendar-day-view>
   </div>
@@ -68,13 +68,18 @@
       <tbody>
         <tr *ngFor="let aankondiging of aankondigingen">
           <td>
-            {{aankondiging.tekst}}
+            {{aankondiging.title}}
           </td>
           <td>
-            {{aankondiging.datum | date : 'mediumDate'}}
+            {{aankondiging.start | date : 'mediumDate'}}
           </td>
           <td>
             {{aankondiging.groep}}
+          </td>
+          <td>
+            <button mat-button (click)="bevestigVerwijderenAankondiging(aankondiging)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </tr>
       </tbody>

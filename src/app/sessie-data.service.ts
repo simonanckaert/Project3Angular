@@ -37,18 +37,31 @@ export class SessieDataService {
   }
 
   verwijderOefening(sessie: Sessie, oef : Oefening) {
-    this.firebaseStorage.storage.refFromURL(oef.url).delete().then(() => this.uploadSessie(sessie)).catch(error => console.log('in catch'));
+    console.log('in verwijder oefening')
+    this.firebaseStorage.storage.refFromURL(oef.url).delete().catch(error => console.log('in catch'));
+    this.uploadSessie(sessie);
     //hierbij komt er een foutmelding in console maar het werkt wel, het lijkt alsof hij het 2 keer probeert te verwijderen
   }
 
-  verwijderSessie(sessie: Sessie) {
-    const sessieRef: AngularFirestoreDocument<any> = this.afs.doc(`sessies/${sessie.id}`);
+  verwijderSessie(sessieId: number) {
+    const sessieRef: AngularFirestoreDocument<any> = this.afs.doc(`sessies/${sessieId}`);
     sessieRef.delete();
+  }
+
+  verwijderAankondiging(id: string): any {
+    const aankondigingRef: AngularFirestoreDocument<any> = this.afs.doc(`aankondigingen/${id}`);
+    aankondigingRef.delete();
   }
 
   uploadSessie(sessie: Sessie) {
     const sessieRef: AngularFirestoreDocument<any> = this.afs.doc(`sessies/${sessie.id}`);
-    const data = sessie.toJson();
+    const data = {
+      naam: sessie.naam,
+      beschrijving: sessie.beschrijving,
+      oefeningen: sessie.oefeningen.map(oef => oef.toJSON()),
+      id: sessie.id,
+      sessieCode: sessie.sessieCode
+    };
     return sessieRef.set(data, { merge: true });
   }
 

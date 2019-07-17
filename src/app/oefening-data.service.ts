@@ -44,11 +44,11 @@ export class OefeningDataService {
     this.sessieService.uploadSessie(sessie);
   }
 
-  verwijderOefening(oefening: Oefening) {
+  /*verwijderOefening(oefening: Oefening) {
     //this.sessieService.verwijderOefening(oefening);
     console.log('in verwijderen oefening')
     const oefRef: AngularFirestoreDocument<any> = this.afs.collection(`sessies/${oefening.sessieId}/oefeningen`).doc(`${oefening.oefeningId}`)/*.doc(`sessies/${oefening.sessieId}/oefeningen/`);*/
-    console.log(oefRef);
+    /*console.log(oefRef);
     oefRef.delete();
     //oefRef.delete().then(() => console.log('tis gelukt')).catch(() => console.log('this niet gelukt'));
     /*return this.http
@@ -61,7 +61,7 @@ export class OefeningDataService {
           console.log(err);
         }
       );*/    
-  }
+  /*}*/
 
   updateOefening(oefening: Oefening) {
     return this.http
