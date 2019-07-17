@@ -30,7 +30,6 @@ export class SessieDataService {
   getAankondigingen() {
     return this.afs.collection('aankondigingen').valueChanges();
   }
-  
 
   getSessie(sessieId: number): Observable<Sessie> {
     const sessieRef : AngularFirestoreDocument<any> = this.afs.doc(`sessies/${sessieId}`);
@@ -40,6 +39,11 @@ export class SessieDataService {
   verwijderOefening(sessie: Sessie, oef : Oefening) {
     this.firebaseStorage.storage.refFromURL(oef.url).delete().then(() => this.uploadSessie(sessie)).catch(error => console.log('in catch'));
     //hierbij komt er een foutmelding in console maar het werkt wel, het lijkt alsof hij het 2 keer probeert te verwijderen
+  }
+
+  verwijderSessie(sessie: Sessie) {
+    const sessieRef: AngularFirestoreDocument<any> = this.afs.doc(`sessies/${sessie.id}`);
+    sessieRef.delete();
   }
 
   uploadSessie(sessie: Sessie) {

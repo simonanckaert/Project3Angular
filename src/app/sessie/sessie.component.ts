@@ -16,15 +16,15 @@ import { SessieDataService } from '../sessie-data.service';
 })
 export class SessieComponent implements OnInit, OnChanges {
   @Input() public sessie: Sessie;
-  private _oefeningen: Oefening[];
+  public oefeningen: Oefening[];
   public editMode = false;
   public errorMsg: string;
   public sessieFormGroup: FormGroup;
 
   constructor(
     public dialog: MatDialog,
-    private _oefDataService: OefeningDataService,
-    private _sessieDataService: SessieDataService,
+    private oefDataService: OefeningDataService,
+    private sessieDataService: SessieDataService,
     private fb: FormBuilder,
     public snackbar: MatSnackBar
   ) {}
@@ -45,10 +45,6 @@ export class SessieComponent implements OnInit, OnChanges {
     if (this.editMode) {
       this.toggleEditMode();
     }
-  }
-
-  get oefeningen(): Oefening[] {
-    return this._oefeningen;
   }
 
   // Open new dialog to edit exercise
@@ -73,7 +69,7 @@ export class SessieComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this._oefeningen.push(result);
+        this.oefeningen.push(result);
       }
       setTimeout(() => {
         this.getOefeningen();
@@ -119,9 +115,14 @@ export class SessieComponent implements OnInit, OnChanges {
       this.sessie.naam = this.sessieFormGroup.value.sessieNaam;
       this.sessie.beschrijving = this.sessieFormGroup.value.sessieBeschrijving;
       this.sessie.sessieCode = this.sessieFormGroup.value.sessieCode;
-      this._sessieDataService.updateSessie(this.sessie);
+      this.sessieDataService.updateSessie(this.sessie);
       this.toggleEditMode();
       this.showSnackBar('Sessie succesvol gewijzigd!');
     }
+  }
+
+  verwijderSessie() {
+    this.sessieDataService.verwijderSessie(this.sessie);
+    this.sessie = null;
   }
 }

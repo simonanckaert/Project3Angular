@@ -1,7 +1,10 @@
 <mat-card class="mat-elevation-z0">
   <div class="rightfloat">
-    <button mat-button (click)="toggleEditMode()" disabled="{{editMode}}" tabindex=-1>
+    <button mat-button (click)="toggleEditMode()" disabled="{{editMode}}">
       <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-button (click)="verwijderSessie()">
+      <mat-icon>delete</mat-icon>
     </button>
   </div>
   <div *ngIf="!editMode">
