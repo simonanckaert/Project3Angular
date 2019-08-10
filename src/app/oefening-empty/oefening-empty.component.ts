@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { GebruikerDataService } from '../gebruiker-data.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { SessieDataService } from '../sessie-data.service';
 
 @Component({
   selector: 'app-oefening-empty',
@@ -15,7 +16,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./oefening-empty.component.css']
 })
 export class OefeningEmptyComponent implements OnInit {
-  //private _gebruikers: Observable<any[]>;
 
   public loading = false;
   public oefeningFormGroup: FormGroup;
@@ -25,28 +25,33 @@ export class OefeningEmptyComponent implements OnInit {
   private file: File;
 
   constructor(public dialogRef: MatDialogRef<OefeningEmptyComponent>, @Inject(MAT_DIALOG_DATA) public sessie: Sessie,
-    private oefDataService: OefeningDataService, public gService: GebruikerDataService, 
+    private oefDataService: OefeningDataService, public service: SessieDataService, 
     private fb: FormBuilder, private ngxService: NgxUiLoaderService, private firebaseStorage: AngularFireStorage) {
-    //this._gebruikers = this.gService.getUsers();
-    /*this._gebruikers.subscribe(result => {
+    this.service.getGebruikers().subscribe(result => {
       this.setGroepen(result);
-    });*/
+    });
     //console.log("in oefempty")
     //console.log(sessie)
-    this.setGroepen(null);
+    //this.setGroepen(null);
   }
 
   // Set available groupnrs
   setGroepen(result: any[]) {
-    /*result.forEach(gebruiker => {
+    result.forEach(gebruiker => {
       if (this.groepNummers.indexOf(gebruiker.groepnr) === -1) {
         this.groepNummers.push(gebruiker.groepnr);
       }
-    });*/
-    this.groepNummers.push(1);
-    this.groepNummers.push(2);
-    this.groepNummers.push(3);
+    });
+    this.voegOvergeslagenNummersToe();
     this.groepNummers.sort();
+  }
+
+  voegOvergeslagenNummersToe() {
+    for(let index = 0; index < this.groepNummers.length; index++) {
+      if(!this.groepNummers.includes(index)) {
+        this.groepNummers.push(index);
+      }
+    }
   }
 
   // Close dialog after cancel

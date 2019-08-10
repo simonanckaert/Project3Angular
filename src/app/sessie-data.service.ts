@@ -9,6 +9,8 @@ import { List } from 'lodash';
 import { Oefening } from './oefening/oefening.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Aankondiging } from './aankondiging/aankondiging';
+import { Gebruiker } from './gebruikers/gebruiker.model';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +19,23 @@ export class SessieDataService {
 
   private _sessies : List<Sessie> = [];
   private errorMsg = "";
+  gebruikers: Gebruiker[] = []
 
   constructor(private http: HttpClient, private afs: AngularFirestore,
-     private firebaseStorage: AngularFireStorage ) { 
-    
+     private firebaseStorage: AngularFireStorage, private firebaseAuth: AngularFireAuth) { 
+    this.getGebruikers()
   }
 
   getSessies() {
-    return this.afs.collection('sessies').valueChanges()
+    return this.afs.collection('sessies').valueChanges();
   }
 
   getAankondigingen() {
     return this.afs.collection('aankondigingen').valueChanges();
+  }
+  
+  getGebruikers() {
+    return this.afs.collection('Users').valueChanges()
   }
 
   getSessie(sessieId: number): Observable<Sessie> {
@@ -37,7 +44,6 @@ export class SessieDataService {
   }
 
   verwijderOefening(sessie: Sessie, oef : Oefening) {
-    console.log('in verwijder oefening')
     this.firebaseStorage.storage.refFromURL(oef.url).delete().catch(error => console.log('in catch'));
     this.uploadSessie(sessie);
     //hierbij komt er een foutmelding in console maar het werkt wel, het lijkt alsof hij het 2 keer probeert te verwijderen
@@ -48,9 +54,14 @@ export class SessieDataService {
     sessieRef.delete();
   }
 
-  verwijderAankondiging(id: string): any {
+  verwijderAankondiging(id: string) {
     const aankondigingRef: AngularFirestoreDocument<any> = this.afs.doc(`aankondigingen/${id}`);
     aankondigingRef.delete();
+  }
+
+  verwijderGebruiker(uid: string) {
+    const gebruikersRef: AngularFirestoreDocument<any> = this.afs.doc(`Users/${uid}`);
+    gebruikersRef.delete();
   }
 
   uploadSessie(sessie: Sessie) {
@@ -63,6 +74,17 @@ export class SessieDataService {
       sessieCode: sessie.sessieCode
     };
     return sessieRef.set(data, { merge: true });
+  }
+
+  uploadGebruiker(gebruiker) {
+    const gebruikersRef: AngularFirestoreDocument<any> = this.afs.doc(`Users/${gebruiker.uid}`);
+    const data = {
+      email: gebruiker.email,
+      groepnr: gebruiker.groep,
+      name: gebruiker.name,
+      uid: gebruiker.uid
+    };
+    return gebruikersRef.set(data, { merge: true });
   }
 
   voegNieuweAankondigingToe(aankondiging: Aankondiging) {

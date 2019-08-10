@@ -11,6 +11,7 @@
       <mat-form-field>
         <input type="password" matInput placeholder="Wachtwoord" required formControlName="password" id="password">
       </mat-form-field>
+      <p *ngIf="error">{{error}}</p>
       <button type="submit" mat-raised-button class="basic-button-center" [disabled]="!loginForm.valid">Inloggen</button>
     </form>
   </mat-card>

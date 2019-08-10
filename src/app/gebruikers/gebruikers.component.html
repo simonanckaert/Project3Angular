@@ -5,8 +5,11 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-
-    <button mat-button *ngFor='let groep of groepNummers' (click)="applyGroepFilter(groep)" class="sessies-card-groep mat-elevation-z2"
+    <button mat-button (click)="gebruikGroepFilter('Ø')" class="sessies-card-groep mat-elevation-z2"
+      [class.active]="groep === selectedGroepNr">
+      <b>Ø</b>
+    </button>
+    <button mat-button *ngFor='let groep of groepsnummers' (click)="gebruikGroepFilter(groep)" class="sessies-card-groep mat-elevation-z2"
       [class.active]="groep === selectedGroepNr">
       <b>{{groep}}</b>
     </button>
@@ -29,7 +32,7 @@
 
   <mat-card-content>
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="gebruikFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" *ngIf="dataSource" class="mat-elevation-z2">
@@ -51,9 +54,9 @@
         <th mat-header-cell *matHeaderCellDef> Groep </th>
         <td mat-cell *matCellDef="let element">
           <mat-form-field>
-            <mat-select [value]="groepen[element.groepnr]" (selectionChange)="changeGroup(element.uid, $event.value)">
-              <mat-option *ngFor="let groep of groepen" [value]="groep">
-                {{groep.viewValue}}
+            <mat-select [value]="groepsnummers[element.groepnr]" (selectionChange)="changeGroup(element, $event.value)">
+              <mat-option *ngFor="let groep of groepsnummers" [value]="groep">
+                {{groep}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -74,10 +77,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <br>
-    <div style="float: right" *ngIf="dataSource.data.length > 1 || dataSource.data.length == 0"><b>{{dataSource.data.length}}</b>
-      gebruikers</div>
-    <div style="float: right" *ngIf="dataSource.data.length == 1"><b>{{dataSource.data.length}}</b> gebruiker</div>
-    <br>
   </mat-card-content>
 </mat-card>
 
@@ -93,7 +92,7 @@
 
   <mat-card-content>
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="gebruikFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSourceAll" *ngIf="dataSourceAll" class="mat-elevation-z2">
@@ -114,7 +113,7 @@
       <ng-container matColumnDef="group">
         <th mat-header-cell *matHeaderCellDef> Huidige groep </th>
         <td mat-cell *matCellDef="let element">
-          {{groepen[element.groepnr].viewValue}}
+          {{element.groepnr}}
         </td>
       </ng-container>
 
@@ -122,7 +121,7 @@
       <ng-container matColumnDef="add">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-flat-button class="sessies-card-groep" (click)="changeGroup(element.uid, groepen[selectedGroepNr])" style="float: right">
+            <button mat-flat-button class="sessies-card-groep" (click)="changeGroup(element, selectedGroepNr)" style="float: right">
               Toevoegen
             </button>
           </td>
@@ -131,10 +130,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumnsAdd"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsAdd;"></tr>
     </table>
-    <br>
-    <div style="float: right" *ngIf="dataSourceAll.data.length > 1 || dataSourceAll.data.length == 0"><b>{{dataSourceAll.data.length}}</b>
-      gebruikers</div>
-    <div style="float: right" *ngIf="dataSourceAll.data.length == 1"><b>{{dataSourceAll.data.length}}</b> gebruiker</div>
     <br>
   </mat-card-content>
 </mat-card>
