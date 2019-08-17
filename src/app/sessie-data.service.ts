@@ -11,14 +11,13 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Aankondiging } from './aankondiging/aankondiging';
 import { Gebruiker } from './gebruikers/gebruiker.model';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Feedback } from './feedback/feedback.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessieDataService {
 
-  private _sessies : List<Sessie> = [];
-  private errorMsg = "";
   gebruikers: Gebruiker[] = []
 
   constructor(private http: HttpClient, private afs: AngularFirestore,
@@ -88,11 +87,8 @@ export class SessieDataService {
   }
 
   voegNieuweAankondigingToe(aankondiging: Aankondiging) {
-    console.log('in service');
-    console.log(aankondiging);
     const aankondigingRef: AngularFirestoreDocument<any> = this.afs.doc(`aankondigingen/${aankondiging.id}`)
     const data = aankondiging.toJson();
-    console.log(data);
     return aankondigingRef.set(data, { merge: true});
   }
 
@@ -108,16 +104,7 @@ export class SessieDataService {
     sessieRef.delete();
   }*/
 
-  updateSessie(sessie: Sessie) {
-    return this.http
-      .put<Sessie>(globals.backendUrl + `/sessies`, sessie)
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+  getFeedbackFromOefening(oefening: Oefening) {
+    return this.afs.collection("feedback").doc(oefening.sessieId.toString()).collection("oefeningen").doc(oefening.oefeningId.toString()).collection("feedback").valueChanges()
   }
 }

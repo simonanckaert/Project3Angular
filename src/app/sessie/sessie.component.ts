@@ -115,7 +115,7 @@ export class SessieComponent implements OnInit, OnChanges {
       this.sessie.naam = this.sessieFormGroup.value.sessieNaam;
       this.sessie.beschrijving = this.sessieFormGroup.value.sessieBeschrijving;
       this.sessie.sessieCode = this.sessieFormGroup.value.sessieCode;
-      this.sessieDataService.updateSessie(this.sessie);
+      this.sessieDataService.uploadSessie(this.sessie);
       this.toggleEditMode();
       this.showSnackBar('Sessie succesvol gewijzigd!');
     }

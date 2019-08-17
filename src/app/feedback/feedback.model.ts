@@ -1,6 +1,5 @@
 export class Feedback {
     private _feedbackId: number;
-
     private _oefeningId: number;
     private _beschrijving: string;
     private _score: number;
@@ -25,17 +24,5 @@ export class Feedback {
 
     get score(): number {
         return this._score;
-    }
-
-    set oefeningId(oefeningId: number) {
-        this._oefeningId = oefeningId;
-    }
-
-    set beschrijving(beschrijving: string) {
-        this._beschrijving = beschrijving;
-    }
-
-    set score(score: number) {
-        this._score = score;
     }
 }
