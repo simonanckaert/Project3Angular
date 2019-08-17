@@ -6,7 +6,6 @@ import {
 } from '@angular/fire/firestore';
 //import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/database';
 
 interface User {
   uid: string;

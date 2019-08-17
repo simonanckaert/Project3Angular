@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import { MatDialog, MatDialogRef , MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AngularFireDatabase} from "@angular/fire/database";
+import { MatDialogRef , MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Aankondiging } from '../aankondiging/aankondiging';
@@ -12,18 +11,19 @@ import { Aankondiging } from '../aankondiging/aankondiging';
    
 })
 export class AankondigingenComponentDialog implements OnInit {
-    form: FormGroup;
-    aankondiging : string;
-    date : Date;
-    groep : string;
-    //private _gebruikers: Observable<any[]>;
-    public groepNummers = [];
+  form: FormGroup;
+  aankondiging : string;
+  date : Date;
+  groep : string;
+  public groepNummers = [];
 
-constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AankondigingenComponentDialog>,
-   @Inject(MAT_DIALOG_DATA) public data, private dataService: DataService) { }
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AankondigingenComponentDialog>,
+    @Inject(MAT_DIALOG_DATA) public data, private dataService: DataService) { }
 
   ngOnInit() {
-    this.setGroepen()
+    this.dataService.getGebruikers().subscribe(result => {
+      this.setGroepen(result);
+    });
     this.form = this.fb.group({
       aankondiging: [this.aankondiging,[]],
       date: [this.date,[]],
@@ -32,14 +32,22 @@ constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<Aankondigin
     ); 
   }
 
-  setGroepen(/*result: any[]*/) {
-  /*result.forEach(gebruiker => {
+  setGroepen(result: any[]) {
+    result.forEach(gebruiker => {
       if (this.groepNummers.indexOf(gebruiker.groepnr) === -1) {
         this.groepNummers.push(gebruiker.groepnr);
       }
-    });*/
-    this.groepNummers.push(1,2,3);
+    });
+    this.voegOvergeslagenNummersToe();
     this.groepNummers.sort();
+  }
+
+  voegOvergeslagenNummersToe() {
+    for(let index = 0; index < this.groepNummers.length; index++) {
+      if(!this.groepNummers.includes(index)) {
+        this.groepNummers.push(index);
+      }
+    }
   }
 
   save() {

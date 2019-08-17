@@ -115,7 +115,6 @@ export class FeedbackComponent implements OnInit, OnChanges {
               return new Feedback(f["beschrijving"], f["ratingFeedback"], f["oefeningId"])
             })
             this.feedback = gevondenFeedback;
-            //this.gemiddeldeFeedbackGekozenOefening = this.calculateFeedbackPercentage(gevondenFeedback)
           } else {
             this.feedback = null;
           }

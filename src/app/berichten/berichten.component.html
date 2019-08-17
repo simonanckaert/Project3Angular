@@ -34,8 +34,7 @@
           <mat-list-item
             class=" messageGeneral"
             style="height: auto;"
-            *ngFor="let message of messages"
-          >
+            *ngFor="let message of messages">
             <div class="messageAdmin" *ngIf="message.admin">
               <p class="berichtText">{{ message.content }}</p>
               <p class="miniText">
@@ -55,16 +54,6 @@
         <div class="conversation-input">
           <mat-divider></mat-divider>
           <mat-form-field class="full-width">
-            <!--
-              input
-                matInput
-                placeholder="Typ hier"
-                name="text"
-                [(ngModel)]="textChat"
-                (keyup.enter)="stuurBericht(textChat)"
-              /
-            -->
-
             <textarea
               matInput
               placeholder="Typ hier"
@@ -79,74 +68,3 @@
     </mat-card>
   </div>
 </div>
-
-<!--
-  mat-sidenav-container class="berichten-container">
-    <mat-sidenav mode="side" opened>
-      <mat-card >
-        <mat-tab-group>
-          <mat-tab>
-            <ng-template mat-tab-label>
-              <mat-icon matListIcon>forum</mat-icon>
-            </ng-template>
-            <mat-list class="klanten-gesprekken">
-              <mat-list-item
-                *ngFor="let item of klanten"
-                (click)="kiesGesprek(item)" >
-                {{ item.naam }}
-              </mat-list-item>
-            </mat-list>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-    </mat-sidenav>
-
-  <section class="empty-conversation" *ngIf="!gekozenChatUser">
-    <h1 class="mat-display-1">Geen Gesprek geselecteerd.</h1>
-  </section>
-
-  <section *ngIf="gekozenChatUser">
-    <div class="conversation-header" mat-typography>
-      <h2>{{ gekozenChatUser.naam }}</h2>
-    </div>
-    <mat-divider></mat-divider>
-    <mat-list dense class="conversation-history mat-typography">
-      <mat-list-item class=" messageGeneral" style="height: auto;" *ngFor="let message of messages">
-        <div class="messageAdmin" *ngIf="message.admin">
-          <p class="berichtText">{{ message.content }}</p>
-          <p class="miniText">{{ message.messageTime | date: 'dd/MM/yyyy'}}</p>
-        </div>
-
-        <div class="messageClient" *ngIf="!message.admin">
-          <p class="berichtText">{{ message.content }}</p>
-          <p class="miniText">{{ message.messageTime | date: 'dd/MM/yyyy' }}</p>
-        </div>
-      </mat-list-item>
-    </mat-list>
-
-
-    <div class="conversation-input">
-      <mat-divider></mat-divider>
-      <mat-form-field class="full-width">
-          input
-          matInput
-          placeholder="Typ hier"
-          name="text"
-          [(ngModel)]="textChat"
-          (keyup.enter)="stuurBericht(textChat)"
-        /
--->
-<!--
-           <textarea
-            matInput
-            placeholder="Typ hier"
-            name="textChat"
-            [(ngModel)]="textChat"
-            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-          ></textarea>
-          <mat-icon matSuffix (click)="stuurBericht(textChat)">send</mat-icon>
-        </mat-form-field>
-      </div>
-    </section>
-  </mat-sidenav-container
--->

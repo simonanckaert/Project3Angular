@@ -33,7 +33,6 @@ export class SessieComponent implements OnInit, OnChanges {
       sessieBeschrijving: [this.sessie.beschrijving, [Validators.required]],
       sessieCode: [this.sessie.sessieCode]
     });
-    //console.log(this.sessie)
   }
 
   ngOnChanges() {

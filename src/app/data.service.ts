@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Sessie } from './sessie/sessie.model';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-//import * as firebase from 'firebase';
 import { Oefening } from './oefening/oefening.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Aankondiging } from './aankondiging/aankondiging';

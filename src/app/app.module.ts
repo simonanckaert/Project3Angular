@@ -40,14 +40,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { BerichtenComponent } from './berichten/berichten.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ChartsModule } from 'ng2-charts';
-import { VerwijderAlertComponent } from './verwijder-alert/verwijder-alert.component';
-//import { NgxSpinnerModule } from 'ngx-spinner'
-//import { NgxLoadingModule } from 'ngx-loading';
 import localeNl from '@angular/common/locales/nl-BE';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { AngularFireStorage } from '@angular/fire/storage';
-
-/** test@test.com   123456 */
 
 registerLocaleData(localeNl);
 
@@ -68,10 +63,9 @@ registerLocaleData(localeNl);
     AankondigingenComponentDialog,
     BerichtenComponent,
     FeedbackComponent,
-    VerwijderAlertComponent
   ],
   entryComponents: [OefeningComponent, OefeningEmptyComponent, SessieEmptyComponent,
-    AankondigingenComponentDialog, VerwijderAlertComponent],
+    AankondigingenComponentDialog],
 
   imports: [
     BrowserModule,

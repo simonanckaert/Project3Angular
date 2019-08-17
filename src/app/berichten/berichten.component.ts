@@ -1,13 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireList } from '@angular/fire/database';
 import { Observable, Subscription } from "rxjs";
-//import * as firebase from "firebase";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument
-} from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
-//import { takeWhile } from "rxjs/operators";
 
 @Component({
   selector: "app-berichten",

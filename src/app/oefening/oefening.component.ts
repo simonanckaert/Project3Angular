@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { DataService } from '../data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Sessie } from '../sessie/sessie.model';
-//import * as firebase from 'firebase';
 
 
 @Component({
@@ -22,8 +21,6 @@ export class OefeningComponent implements OnInit {
   groepNummers = [];
   selectedGroepnummers = [];
   url: string = 'test';
-
-  private gebruikers: Observable<any[]>;
 
   constructor(public dialogRef: MatDialogRef<OefeningComponent>,
               @Inject(MAT_DIALOG_DATA) public oef: Oefening, private fb: FormBuilder,

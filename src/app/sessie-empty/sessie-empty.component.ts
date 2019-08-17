@@ -12,14 +12,8 @@ import { DataService } from '../data.service';
 export class SessieEmptyComponent implements OnInit {
   public sessieFormGroup: FormGroup;
 
-  constructor(
-    public dialogRef: MatDialogRef<SessieEmptyComponent>,
-    private sessieDataService: DataService,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public id: number
-  ) { 
-    console.log(this.id);
-  }
+  constructor(public dialogRef: MatDialogRef<SessieEmptyComponent>, private sessieDataService: DataService,
+    private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public id: number) {}
 
   // Sessie form validation
   ngOnInit() {
@@ -41,7 +35,6 @@ export class SessieEmptyComponent implements OnInit {
         this.sessieFormGroup.value.sessieBeschrijving
       );
       sessie.sessieCode = (Math.floor(Math.random()*90000) + 10000).toString();
-      //console.log(sessie)
 
       this.dialogRef.close(
         this.sessieDataService.uploadSessie(sessie)

@@ -31,7 +31,6 @@ export class SessieLijstComponent implements OnInit, OnChanges {
     this.getSessies();
   }
 
-  // HTTP Get request to get all sessies
   getSessies() {
     this.sessieDataService.getSessies().subscribe(
       data => {
@@ -73,9 +72,6 @@ export class SessieLijstComponent implements OnInit, OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      /*if (result) {
-        this._sessies.push(result);
-      }*/
       setTimeout(() => {
         this.getSessies();
       }, 200);

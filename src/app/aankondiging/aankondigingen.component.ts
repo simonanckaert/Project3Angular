@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy , ViewChild,TemplateRef , Injectable} from '@angular/core';
 import {
-  startOfDay,
   isSameDay,
   isSameMonth,
 } from 'date-fns';
@@ -11,7 +10,7 @@ import {
 } from 'angular-calendar';
 import {CalendarEvent} from'./calendarUtils';
 import { MatDialog} from '@angular/material/dialog';
-import { AngularFireDatabase,AngularFireList } from "@angular/fire/database";
+import { AngularFireList } from "@angular/fire/database";
 import { Aankondiging } from './aankondiging';
 import { AankondigingenComponentDialog } from '../aankondiging-empty/aankondigingdialog.component';
 import { Observable } from 'rxjs';
