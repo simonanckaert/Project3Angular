@@ -3,7 +3,7 @@ import { Sessie } from './sessie/sessie.model';
 import * as globals from '../globals/globals';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreDocument, AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 //import * as firebase from 'firebase';
 import { List } from 'lodash';
 import { Oefening } from './oefening/oefening.model';

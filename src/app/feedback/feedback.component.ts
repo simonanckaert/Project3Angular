@@ -24,6 +24,7 @@ export class FeedbackComponent implements OnInit, OnChanges {
   private oefening: Oefening;
   private oefeningen: Oefening[] = [];
   private feedback = null;
+  public gemiddeldeFeedbackGekozenOefening = 0;
 
   public errorMsg: string;
 
@@ -111,11 +112,13 @@ export class FeedbackComponent implements OnInit, OnChanges {
 
   // Sets feedback to that from the selected exercise
   toonOefeningFeedback(gekozenOefening: Oefening): Oefening {
-    this.getFeedback(gekozenOefening)
-      .subscribe(
-        gevondenFeedback => {
+    this.getFeedback(gekozenOefening).subscribe(gevondenFeedback => {
           if (gevondenFeedback.length > 0) {
+            gevondenFeedback = gevondenFeedback.map(f => {
+              return new Feedback(f["beschrijving"], f["ratingFeedback"], f["oefeningId"])
+            })
             this.feedback = gevondenFeedback;
+            //this.gemiddeldeFeedbackGekozenOefening = this.calculateFeedbackPercentage(gevondenFeedback)
           } else {
             this.feedback = null;
           }
@@ -139,7 +142,7 @@ export class FeedbackComponent implements OnInit, OnChanges {
   calculateFeedbackPercentage(feedback): number {
     let totalFeedback = 0;
     let totalScore = 0;
-    if (feedback) {
+    if (feedback.length > 0) {
       feedback.forEach(element => {
         totalFeedback += 1;
         totalScore += +element.score;
@@ -149,26 +152,6 @@ export class FeedbackComponent implements OnInit, OnChanges {
     }
     return null;
   }
-
-  // Remove all feedback (useful after exercise change or when view is too cluttered)
-  /*verwijderFeedback() {
-    const dialogRef = this.dialog.open(VerwijderAlertComponent, {
-      minWidth: 300,
-      data: {
-        dataName: '',
-        dataSentence: 'Ben je zeker dat je alle feedback van deze oefening wilt verwijderen?',
-        dataId: this._oefening.oefeningId
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(r => {
-      if (r) {
-        this._feedback = null;
-        // Remove feedback
-        this._oefDataService.verwijderFeedbackOefening(this._oefening.oefeningId);
-      }
-    });
-  }*/
 
   // events on chart click
   public chartClicked(e: any): void {

@@ -37,11 +37,7 @@
           </b>
         </h6>
       </mat-card>
-
       <mat-card style="margin-top:10px" *ngIf="feedback" class="mat-elevation-z0">
-        <button mat-flat-button [color]="'warn'" (click)="verwijderFeedback()" style="float: right">Feedback
-          verwijderen</button>
-        <br>
         <h6>Feedback:</h6>
         <mat-list>
           <mat-list-item *ngFor="let f of feedback">- {{f.beschrijving}}</mat-list-item>
@@ -50,7 +46,6 @@
     </div>
   </div>
 </div>
-
 <mat-card class="global-card mat-elevation-z0" *ngIf="this.barChartLabels.length === this.barChartData[0].data.length">
   <mat-card-content>
     <div>
