@@ -10,13 +10,10 @@
             <mat-list-item class="klanten-gesprekken"
               *ngFor="let item of klanten; index as i"
               (click)="kiesGesprek(item)"
-              style="cursor: pointer;"
-            >
+              style="cursor: pointer;">
               {{ item.naam }} ({{ongelezen[i]}})
               <mat-divider></mat-divider>
-
             </mat-list-item>
-
           </mat-list>
         </mat-tab>
       </mat-tab-group>
