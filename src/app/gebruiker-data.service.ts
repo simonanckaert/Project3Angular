@@ -12,7 +12,7 @@ import { _throw } from 'rxjs/observable/throw';
 })
 export class GebruikerDataService {
 
-  constructor(private http: HttpClient) {}
+  /*constructor(private http: HttpClient) {}
 
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(globals.backendUrl + `/users`);
@@ -34,5 +34,5 @@ export class GebruikerDataService {
 
   removeUser(uid: string): Observable<any> {
     return this.http.delete(globals.backendUrl + '/users/' + uid)
-  }
+  }*/
 }

@@ -25,9 +25,9 @@ export class OefeningEmptyComponent implements OnInit {
   private file: File;
 
   constructor(public dialogRef: MatDialogRef<OefeningEmptyComponent>, @Inject(MAT_DIALOG_DATA) public sessie: Sessie,
-    private oefDataService: OefeningDataService, public service: SessieDataService, 
-    private fb: FormBuilder, private ngxService: NgxUiLoaderService, private firebaseStorage: AngularFireStorage) {
-    this.service.getGebruikers().subscribe(result => {
+    public dataService: SessieDataService, private fb: FormBuilder, private ngxService: NgxUiLoaderService, 
+    private firebaseStorage: AngularFireStorage) {
+    this.dataService.getGebruikers().subscribe(result => {
       this.setGroepen(result);
     });
     //console.log("in oefempty")
@@ -104,7 +104,7 @@ export class OefeningEmptyComponent implements OnInit {
           oefening.fileOriginalName = this.file.name;
           oefening.fileSize = this.file.size;
           this.sessie.addOefening(oefening);
-          this.dialogRef.close(this.oefDataService.voegNieuweOefeningToe(this.sessie));
+          this.dialogRef.close(this.dataService.uploadSessie(this.sessie));
         }).finally(() => this.ngxService.stop())
       })
 

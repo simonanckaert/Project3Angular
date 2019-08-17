@@ -36,12 +36,10 @@ export class SessieComponent implements OnInit, OnChanges {
       sessieBeschrijving: [this.sessie.beschrijving, [Validators.required]],
       sessieCode: [this.sessie.sessieCode]
     });
-    this.getOefeningen();
     //console.log(this.sessie)
   }
 
   ngOnChanges() {
-    this.getOefeningen();
     if (this.editMode) {
       this.toggleEditMode();
     }
@@ -53,13 +51,8 @@ export class SessieComponent implements OnInit, OnChanges {
       minWidth: 300,
       data: oef
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      setTimeout(() => {
-        this.getOefeningen();
-      }, 200);
-    });
   }
+
   // Open new dialog to add exercise
   openEmptyDialog(): void {
     const dialogRef = this.dialog.open(OefeningEmptyComponent, {
@@ -71,9 +64,6 @@ export class SessieComponent implements OnInit, OnChanges {
       if (result) {
         this.oefeningen.push(result);
       }
-      setTimeout(() => {
-        this.getOefeningen();
-      }, 2000);
     });
   }
 
@@ -91,19 +81,6 @@ export class SessieComponent implements OnInit, OnChanges {
       sessieBeschrijving: [this.sessie.beschrijving, [Validators.required]],
       sessieCode: [this.sessie.sessieCode]
     });
-  }
-
-  getOefeningen() {
-    /*return this._oefDataService
-      .getOefeningenFromSessie(this.sessie.id)
-      .subscribe(
-        oefs => (this._oefeningen = oefs),
-        (error: HttpErrorResponse) => {
-          this.errorMsg = `Error ${
-            error.status
-            } while trying to retrieve oefeningen: ${error.error}`;
-        }
-      );*/
   }
 
   onNoClick(): void {

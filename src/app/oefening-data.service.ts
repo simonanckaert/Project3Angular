@@ -11,7 +11,7 @@ import { Aankondiging } from './aankondiging/aankondiging';
 
 @Injectable()
 export class OefeningDataService {
-  constructor(private http: HttpClient, private sessieService : SessieDataService, private afs: AngularFirestore) {}
+  /*constructor(private http: HttpClient, private sessieService : SessieDataService, private afs: AngularFirestore) {}
 
   getOefeningen(): Observable<Oefening[]> {
     return this.http.get<Oefening[]>(globals.backendUrl + `/oefeningen`).pipe();
@@ -41,7 +41,7 @@ export class OefeningDataService {
       .post<Oefening>(globals.backendUrl + `/oefeningen`, fd)
       .pipe();*/
     //console.log(sessie);
-    this.sessieService.uploadSessie(sessie);
+    /*this.sessieService.uploadSessie(sessie);
   }
 
   /*verwijderOefening(oefening: Oefening) {
@@ -63,7 +63,7 @@ export class OefeningDataService {
       );*/    
   /*}*/
 
-  updateOefening(oefening: Oefening) {
+  /*updateOefening(oefening: Oefening) {
     return this.http
       .put(globals.backendUrl + '/oefeningen/', oefening)
       .subscribe(
@@ -93,5 +93,5 @@ export class OefeningDataService {
           console.log(err);
         }
       );
-  }
+  }*/
 }

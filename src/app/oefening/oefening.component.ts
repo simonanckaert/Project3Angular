@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { SessieDataService } from '../sessie-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Sessie } from '../sessie/sessie.model';
 //import * as firebase from 'firebase';
 
 
@@ -23,20 +24,18 @@ export class OefeningComponent implements OnInit {
   oefeningFormGroup: FormGroup;
   file: File;
   groepNummers = [];
-  selectedGroepnummers = ['1','2'];
+  selectedGroepnummers = [];
   url: string = 'test';
 
   private gebruikers: Observable<any[]>;
 
-  constructor(private oefDataService: OefeningDataService, public gService: GebruikerDataService,
-              public dialogRef: MatDialogRef<OefeningComponent>,
+  constructor(public dialogRef: MatDialogRef<OefeningComponent>,
               @Inject(MAT_DIALOG_DATA) public oef: Oefening, private fb: FormBuilder,
-              private sessieDataService: SessieDataService) {
-    /*this.gebruikers = this.gService.getUsers();
-    this.gebruikers.subscribe(result => {
+              private dataService: SessieDataService) {
+    this.dataService.getGebruikers().subscribe(result => {
       this.setGroepen(result);
-    });*/
-    this.setSelectedGroepen();
+      this.setSelectedGroepen()
+    });
   }
 
   // Set available groupnrs
@@ -65,11 +64,6 @@ export class OefeningComponent implements OnInit {
       oefeningNaam: [this.oef.naam, [Validators.required, Validators.minLength(4)]],
       oefeningBeschrijving: [this.oef.beschrijving, [Validators.required]],
     });
-
-    /*firebase.storage().ref(this.oef.fileName).getDownloadURL().then(result => {
-      console.log(result)
-      this.url = result
-    })*/
   }
 
   // Toggle editmode on/off
@@ -82,7 +76,7 @@ export class OefeningComponent implements OnInit {
     if (result.checked) {
       this.selectedGroepnummers.push(nummer);
     } else {
-      const index: number = this.selectedGroepnummers.indexOf(nummer);
+      const index: number = this.selectedGroepnummers.indexOf(nummer.toString());
       if (index !== -1) {
         this.selectedGroepnummers.splice(index, 1);
       }
@@ -93,12 +87,12 @@ export class OefeningComponent implements OnInit {
   // Remove exercise
   oefeningVerwijderen() {
     if (confirm('Ben je zeker dat je ' + this.oef.naam + ' wilt verwijderen?')) {
-      var sessieObservable = this.sessieDataService.getSessie(this.oef.sessieId);
+      var sessieObservable = this.dataService.getSessie(this.oef.sessieId);
       sessieObservable.subscribe(
         data => {
           const index : number = data.oefeningen.map(oefening => oefening.oefeningId).indexOf(this.oef.oefeningId);
           data.oefeningen.splice(index, 1);
-          this.sessieDataService.verwijderOefening(data, this.oef);
+          this.dataService.verwijderOefening(data, this.oef);
         },
         (error: HttpErrorResponse) => {
           console.log(error);
@@ -121,7 +115,24 @@ export class OefeningComponent implements OnInit {
       this.oef.groepen = groepen;
       this.oef.file = this.file;
 
-      this.dialogRef.close(this.oefDataService.updateOefening(this.oef));
+      this.dataService.getSessie(this.oef.sessieId).subscribe(
+        data => {
+          data = new Sessie(data['id'],
+          data['naam'],
+          data['beschrijving'],
+          data['sessieCode'],
+          data['oefeningen'] !=  undefined ? data['oefeningen'].map(oef => Oefening.fromJSON(oef)) : [])
+          var index = data.oefeningen.map(oef => oef.oefeningId).indexOf(this.oef.oefeningId)
+          if(index !== -1) {
+            data.oefeningen[index] = this.oef
+            this.dataService.uploadSessie(data);
+          }
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      );
+      this.dialogRef.close();
     }
   }
 

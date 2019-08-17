@@ -61,7 +61,7 @@ export class AankondigingenComponent implements OnInit {
   }
 
   ngOnChanged() {
-    this.getAankondigingen()
+    //this.getAankondigingen()
   }
 
   getAankondigingen() {
