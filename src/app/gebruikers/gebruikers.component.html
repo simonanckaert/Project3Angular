@@ -49,6 +49,18 @@
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
       </ng-container>
 
+      <!-- Regio Column -->
+      <ng-container matColumnDef="regio">
+        <th mat-header-cell *matHeaderCellDef> regio </th>
+        <td mat-cell *matCellDef="let element"> {{element.regio}} </td>
+      </ng-container>
+
+      <!-- Telefoonnummer Column -->
+      <ng-container matColumnDef="telnr">
+        <th mat-header-cell *matHeaderCellDef> Telefoonnummer </th>
+        <td mat-cell *matCellDef="let element"> {{element.telnr}} </td>
+      </ng-container>
+
       <!-- Group Column -->
       <ng-container matColumnDef="group">
         <th mat-header-cell *matHeaderCellDef> Groep </th>
@@ -107,6 +119,18 @@
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- Regio Column -->
+      <ng-container matColumnDef="regio">
+        <th mat-header-cell *matHeaderCellDef> regio </th>
+        <td mat-cell *matCellDef="let element"> {{element.regio}} </td>
+      </ng-container>
+
+      <!-- Telefoonnummer Column -->
+      <ng-container matColumnDef="telnr">
+        <th mat-header-cell *matHeaderCellDef> Telefoonnummer </th>
+        <td mat-cell *matCellDef="let element"> {{element.telnr}} </td>
       </ng-container>
 
       <!-- Group Column -->

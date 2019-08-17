@@ -16,14 +16,13 @@ import { SessieDataService } from '../sessie-data.service';
 })
 export class SessieComponent implements OnInit, OnChanges {
   @Input() public sessie: Sessie;
-  public oefeningen: Oefening[];
+  public oefeningen: Oefening[] = [];
   public editMode = false;
   public errorMsg: string;
   public sessieFormGroup: FormGroup;
 
   constructor(
     public dialog: MatDialog,
-    private oefDataService: OefeningDataService,
     private sessieDataService: SessieDataService,
     private fb: FormBuilder,
     public snackbar: MatSnackBar
@@ -47,7 +46,7 @@ export class SessieComponent implements OnInit, OnChanges {
 
   // Open new dialog to edit exercise
   openDialog(oef: Oefening): void {
-    const dialogRef = this.dialog.open(OefeningComponent, {
+    this.dialog.open(OefeningComponent, {
       minWidth: 300,
       data: oef
     });

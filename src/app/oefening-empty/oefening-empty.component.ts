@@ -30,9 +30,6 @@ export class OefeningEmptyComponent implements OnInit {
     this.dataService.getGebruikers().subscribe(result => {
       this.setGroepen(result);
     });
-    //console.log("in oefempty")
-    //console.log(sessie)
-    //this.setGroepen(null);
   }
 
   // Set available groupnrs

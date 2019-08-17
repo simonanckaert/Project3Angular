@@ -45,7 +45,16 @@ export class OefeningComponent implements OnInit {
           this.groepNummers.push(gebruiker.groepnr);
       }
     });
+    this.voegOvergeslagenNummersToe();
     this.groepNummers.sort();
+  }
+
+  voegOvergeslagenNummersToe() {
+    for(let index = 0; index < this.groepNummers.length; index++) {
+      if(!this.groepNummers.includes(index)) {
+        this.groepNummers.push(index);
+      }
+    }
   }
 
   // Set groupnrs of selected exercise

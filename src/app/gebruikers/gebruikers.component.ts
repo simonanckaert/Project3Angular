@@ -26,9 +26,9 @@ export class GebruikersComponent implements OnInit {
 
   public selectedGroepNr = 'Ø';
   public selectedGroep = 'Alle gebruikers';
-  public displayedColumns: string[] = ['name', 'email', 'group', 'delete'];
+  public displayedColumns: string[] = ['name', 'email', 'regio','telnr', 'group', 'delete'];
   public dataSource: MatTableDataSource<any>;
-  public displayedColumnsAdd: string[] = ['name', 'email', 'group', 'add'];
+  public displayedColumnsAdd: string[] = ['name', 'email', 'regio','telnr', 'group', 'add'];
   public dataSourceAll: MatTableDataSource<any>;
 
   constructor(
@@ -38,8 +38,7 @@ export class GebruikersComponent implements OnInit {
     public dialog: MatDialog,
     public snackbar: MatSnackBar
   ) {
-    this.getGebruikers()
-    //this.gebruikers = this.getUsers();
+    this.getGebruikers();
   }
 
   ngOnInit() { }
@@ -132,40 +131,6 @@ export class GebruikersComponent implements OnInit {
     gebruiker.groep = nr;
     this.serviceData.uploadGebruiker(gebruiker);
     this.showSnackBar(gebruiker.name, 'ok');
-    //this.gebruikGroepFilter(nr)
-    //this.updateListData()
-    /*const gebruiker = this.gService.getUserById(uid);
-    gebruiker.subscribe(result => {
-      let telnr = 0;
-      if (result.telnr) {
-        telnr = result.telnr;
-      }
-
-      let sessieid = '';
-      if (result.sessieid) {
-        sessieid = result.sessieid;
-      }
-
-      let regio = '';
-      if (result.regio) {
-        regio = result.regio;
-      }
-
-      const updatedGebruiker = {
-        email: result.email,
-        groepnr: nr.value.toString(),
-        name: result.name,
-        telnr: telnr,
-        regio: regio,
-        sessieid: sessieid
-      };
-      this.gService
-        .updateUser(uid, updatedGebruiker)
-        .subscribe();
-      this.showSnackBar(updatedGebruiker.name, 'ok');
-
-      this.updateListData();
-    });*/
   }
 
   // Show snackbar on groupnr change
