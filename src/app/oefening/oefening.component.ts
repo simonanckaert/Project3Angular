@@ -2,13 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Oefening } from './oefening.model';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
-import { OefeningDataService } from '../oefening-data.service';
 import { FormGroup, Validators, FormBuilder } from '../../../node_modules/@angular/forms';
-import * as globals from '../../globals/globals';
-import { GebruikerDataService } from '../gebruiker-data.service';
 import { Observable } from 'rxjs';
-import * as firebase from 'firebase/app';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Sessie } from '../sessie/sessie.model';
 //import * as firebase from 'firebase';
@@ -31,7 +27,7 @@ export class OefeningComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<OefeningComponent>,
               @Inject(MAT_DIALOG_DATA) public oef: Oefening, private fb: FormBuilder,
-              private dataService: SessieDataService) {
+              private dataService: DataService) {
     this.dataService.getGebruikers().subscribe(result => {
       this.setGroepen(result);
       this.setSelectedGroepen()

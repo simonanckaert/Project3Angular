@@ -4,10 +4,8 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { OefeningComponent } from '../oefening/oefening.component';
 import { Oefening } from '../oefening/oefening.model';
 import { OefeningEmptyComponent } from '../oefening-empty/oefening-empty.component';
-import { OefeningDataService } from '../oefening-data.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, Validators, FormBuilder } from '../../../node_modules/@angular/forms';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-sessie',
@@ -23,7 +21,7 @@ export class SessieComponent implements OnInit, OnChanges {
 
   constructor(
     public dialog: MatDialog,
-    private sessieDataService: SessieDataService,
+    private sessieDataService: DataService,
     private fb: FormBuilder,
     public snackbar: MatSnackBar
   ) {}

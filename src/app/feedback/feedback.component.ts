@@ -1,12 +1,9 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { OefeningDataService } from '../oefening-data.service';
 import { Oefening } from '../oefening/oefening.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Feedback } from './feedback.model';
-import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
-import { VerwijderAlertComponent } from '../verwijder-alert/verwijder-alert.component';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 import { Sessie } from '../sessie/sessie.model';
 
 export interface IBarChartData {
@@ -66,7 +63,7 @@ export class FeedbackComponent implements OnInit, OnChanges {
     hoverBorderColor: '#AFDBCE'
   }];
 
-  constructor(private dataService: SessieDataService, public dialog: MatDialog) { }
+  constructor(private dataService: DataService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getOefeningen();

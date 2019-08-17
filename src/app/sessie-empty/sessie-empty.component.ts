@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Sessie } from '../sessie/sessie.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, Validators, FormBuilder } from '../../../node_modules/@angular/forms';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-sessie-empty',
@@ -14,7 +14,7 @@ export class SessieEmptyComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SessieEmptyComponent>,
-    private sessieDataService: SessieDataService,
+    private sessieDataService: DataService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public id: number
   ) { 

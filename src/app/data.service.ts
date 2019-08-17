@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Sessie } from './sessie/sessie.model';
-import * as globals from '../globals/globals';
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { AngularFirestoreDocument, AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
+import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 //import * as firebase from 'firebase';
-import { List } from 'lodash';
 import { Oefening } from './oefening/oefening.model';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Aankondiging } from './aankondiging/aankondiging';
 import { Gebruiker } from './gebruikers/gebruiker.model';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Feedback } from './feedback/feedback.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SessieDataService {
+export class DataService {
 
   gebruikers: Gebruiker[] = []
 
-  constructor(private http: HttpClient, private afs: AngularFirestore,
-     private firebaseStorage: AngularFireStorage, private firebaseAuth: AngularFireAuth) { 
+  constructor(private afs: AngularFirestore, private firebaseStorage: AngularFireStorage) { 
     this.getGebruikers()
   }
 

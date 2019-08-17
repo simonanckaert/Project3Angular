@@ -1,19 +1,16 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { MatDialog, MatDialogRef , MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AngularFireDatabase} from "@angular/fire/database";
-
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { GebruikerDataService } from '../gebruiker-data.service';
-import { Observable } from 'rxjs';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 import { Aankondiging } from '../aankondiging/aankondiging';
+
 @Component({
     selector: 'app-dialog',
     templateUrl: './aankondigingdialog.html',
     styleUrls: ['./aankondigingdialog.css'],
    
-  })
-  
+})
 export class AankondigingenComponentDialog implements OnInit {
     form: FormGroup;
     aankondiging : string;
@@ -22,10 +19,8 @@ export class AankondigingenComponentDialog implements OnInit {
     //private _gebruikers: Observable<any[]>;
     public groepNummers = [];
 
-constructor(private dialog: MatDialog, private db :AngularFireDatabase ,
-    private fb: FormBuilder,public gService: GebruikerDataService,
-    private dialogRef: MatDialogRef<AankondigingenComponentDialog>,
-   @Inject(MAT_DIALOG_DATA) public data, private dataService: SessieDataService) { }
+constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<AankondigingenComponentDialog>,
+   @Inject(MAT_DIALOG_DATA) public data, private dataService: DataService) { }
 
   ngOnInit() {
     this.setGroepen()

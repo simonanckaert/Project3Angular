@@ -18,8 +18,7 @@ import { SessieLijstComponent } from './sessie-lijst/sessie-lijst.component';
 import { SessieComponent } from './sessie/sessie.component';
 import { OefeningComponent } from './oefening/oefening.component';
 import { OefeningEmptyComponent } from './oefening-empty/oefening-empty.component';
-import { OefeningDataService } from './oefening-data.service';
-import { SessieDataService } from './sessie-data.service';
+import { DataService } from './data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SessieEmptyComponent } from './sessie-empty/sessie-empty.component';
 import { LoginComponent } from './login/login.component';
@@ -116,7 +115,7 @@ registerLocaleData(localeNl);
       useFactory: adapterFactory
     }),
   ],
-  providers: [ AuthenticationService, AuthGuardService, OefeningDataService, SessieDataService, AngularFireStorage ],
+  providers: [ AuthenticationService, AuthGuardService, DataService, AngularFireStorage ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

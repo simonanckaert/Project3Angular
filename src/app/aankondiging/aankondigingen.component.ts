@@ -15,7 +15,7 @@ import { AngularFireDatabase,AngularFireList } from "@angular/fire/database";
 import { Aankondiging } from './aankondiging';
 import { AankondigingenComponentDialog } from '../aankondiging-empty/aankondigingdialog.component';
 import { Observable } from 'rxjs';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { MatSnackBar } from '@angular/material';
@@ -54,7 +54,7 @@ export class AankondigingenComponent implements OnInit {
 
   activeDayIsOpen: boolean = true; 
 
-  constructor(private modal: NgbModal,private dialog: MatDialog, private dataService : SessieDataService, public snackbar: MatSnackBar ) {}
+  constructor(private modal: NgbModal,private dialog: MatDialog, private dataService : DataService, public snackbar: MatSnackBar ) {}
       
   ngOnInit() {  
     this.getAankondigingen()  

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Sessie } from '../sessie/sessie.model';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { SessieEmptyComponent } from '../sessie-empty/sessie-empty.component';
@@ -21,7 +21,7 @@ export class SessieLijstComponent implements OnInit, OnChanges {
   sessies: List<Sessie>;
   public errorMsg: string;
 
-  constructor(public db: AngularFirestore, public dialog: MatDialog, private sessieDataService: SessieDataService) {}
+  constructor(public db: AngularFirestore, public dialog: MatDialog, private sessieDataService: DataService) {}
 
   ngOnInit() {
     this.getSessies();

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import {
   MatTableDataSource,
   MatDialog,
   MatSnackBar
 } from '@angular/material';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { SessieDataService } from '../sessie-data.service';
+import { DataService } from '../data.service';
 import { Gebruiker } from './gebruiker.model';
 
 // Extra interface used for groups display
@@ -32,9 +31,8 @@ export class GebruikersComponent implements OnInit {
   public dataSourceAll: MatTableDataSource<any>;
 
   constructor(
-    public afDb: AngularFireDatabase,
     public af: AngularFireAuth,
-    public serviceData: SessieDataService,
+    public serviceData: DataService,
     public dialog: MatDialog,
     public snackbar: MatSnackBar
   ) {
