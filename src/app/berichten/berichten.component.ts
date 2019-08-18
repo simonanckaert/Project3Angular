@@ -104,8 +104,11 @@ export class BerichtenComponent implements OnInit, OnDestroy {
         }
         this.messages.push(message);
       });
+      this.controleerGelezen();
+      this.messages = this.messages.sort(function (a,b) {
+        return (+a.messageTime - +b.messageTime)
+      })
     });
-    this.controleerGelezen();
   }
 
   //Geeft observable terug die overeenkomt met de lijst van messages van gebruiker adh van zijn uid.
